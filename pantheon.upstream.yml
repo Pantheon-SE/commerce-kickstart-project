@@ -11,3 +11,15 @@ protected_web_paths:
   - /private/
   - /sites/default/files/private/
   - /sites/default/files/config/
+
+# Quicksilver hooks
+workflows:
+  # New site creation
+  deploy_product:
+    after:
+      - description: "Enable Pantheon settings"
+        script: private/scripts/pantheon_setup.php
+        type: webphp
+      - description: "Install site profile"
+        script: private/scripts/drush_site_install.php
+        type: webphp
