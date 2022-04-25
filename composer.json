@@ -5,18 +5,42 @@
     "license": "GPL-2.0-or-later",
     "authors": [
         {
-            "name": "",
-            "role": ""
+            "name": "Centarro",
+            "role": "info@centarro.io"
         }
     ],
     "repositories": {
+        "commerce_demo": {
+            "type": "vcs",
+            "url": "https://git.drupalcode.org/project/commerce_demo.git"
+        },
+        "jquery-ui-touch-punch": {
+            "type": "package",
+            "package": {
+                "name": "furf/jquery-ui-touch-punch",
+                "version": "0.2.3",
+                "type": "drupal-library",
+                "dist": {
+                    "type": "zip",
+                    "url": "https://github.com/furf/jquery-ui-touch-punch/archive/4bc009145202d9c7483ba85f3a236a8f3470354d.zip"
+                }
+            }
+        },
+        "select2": {
+            "type": "package",
+            "package": {
+                "name": "select2/select2",
+                "version": "4.1.0-rc.0",
+                "type": "drupal-library",
+                "dist": {
+                    "type": "zip",
+                    "url": "https://github.com/select2/select2/archive/refs/tags/4.1.0-rc.0.zip"
+                }
+            }
+        },
         "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
-        },
-        "asset-packagist": {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
         }
     },
     "config": {
@@ -38,11 +62,13 @@
     "require": {
         "php": ">=7.3",
         "ext-curl": "*",
+        "centarro/certified-projects": "^1.0",
         "centarro/commerce_kickstart": "^3.0",
         "composer/installers": "^1.9",
         "cweagans/composer-patches": "^1.7",
         "drupal/core-dev": "^9.1",
         "drupal/core-composer-scaffold": "^9.1",
+        "drupal/default_content": "2.0.0-alpha1",
         "pantheon-systems/drupal-integrations": "^9",
         "drush/drush": "^10.3",
         "vlucas/phpdotenv": "^5.1",
@@ -83,12 +109,25 @@
     },
     "extra": {
         "composer-exit-on-patch-failure": true,
+        "patches": {
+            "drupal/default_content": {
+                "#3160146 Add a Normalizer and Denormalizer to support Layout Builder": "patches/default_content/3160146-layout-builder.patch"
+            }
+        },
         "enable-patching": true,
         "patchLevel": {
-            "drupal/core": "-p2"
+            "drupal/core": "-p2",
+            "drupal/default_content": "-p1"
         },
         "drupal-scaffold": {
             "locations": {
+                "web-root": "web/"
+            },
+            "overwrite": true,
+            "file-mapping": {
+                "[web-root]/libraries/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js": "libraries/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js",
+                "[web-root]/libraries/select2/dist/js/select2.min.js": "libraries/select2/dist/js/select2.min.js",
+                "[web-root]/libraries/select2/dist/css/select2.min.css": "libraries/select2/dist/css/select2.min.css"
                 "web-root": "./web"
             },
             "allowed-packages": [
@@ -100,18 +139,14 @@
                 "[project-root]/.gitattributes": false
             }
         },
-        "installer-types": [
-            "bower-asset",
-            "npm-asset"
-        ],
         "installer-paths": {
-            "web/core": [
-                "type:drupal-core"
+            "web/core": ["type:drupal-core"],
+            "libraries/{$name}": [
+                "furf/jquery-ui-touch-punch",
+                "select2/select2"
             ],
             "web/libraries/{$name}": [
-                "type:drupal-library",
-                "type:bower-asset",
-                "type:npm-asset"
+                "type:drupal-library"
             ],
             "web/modules/contrib/{$name}": [
                 "type:drupal-module"
