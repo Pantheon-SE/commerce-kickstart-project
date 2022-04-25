@@ -32,3 +32,25 @@ $local_settings = __DIR__ . "/settings.local.php";
 if (file_exists($local_settings)) {
   include $local_settings;
 }
+
+// Centarro Commerce settings
+$settings['entity_update_batch_size'] = 50;
+$settings['entity_update_backup'] = TRUE;
+$settings['migrate_node_migrate_type_classic'] = FALSE;
+
+// Set a default config sync directory outside of the docroot.
+// This is defined inside the read-only "config" directory, deployed via Git.
+$settings['config_sync_directory'] = '../config/sync';
+
+// Use Centarro Claro for update.php; should be unset if the site does not
+// keep the Centarro Claro admin theme installed.
+// @see https://github.com/centarro/centarro_claro
+$settings['maintenance_theme'] = 'centarro_claro';
+
+// Enable DDEV-Local specific configuration if running in that environment.
+if (getenv('IS_DDEV_PROJECT') == 'true') {
+  $config['config_split.config_split.ddev']['status'] = TRUE;
+}
+else {
+  $config['config_split.config_split.ddev']['status'] = FALSE;
+}

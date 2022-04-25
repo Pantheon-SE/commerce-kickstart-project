@@ -125,28 +125,22 @@
             },
             "overwrite": true,
             "file-mapping": {
-                "[web-root]/libraries/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js": "libraries/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js",
-                "[web-root]/libraries/select2/dist/js/select2.min.js": "libraries/select2/dist/js/select2.min.js",
-                "[web-root]/libraries/select2/dist/css/select2.min.css": "libraries/select2/dist/css/select2.min.css"
-                "web-root": "./web"
-            },
-            "allowed-packages": [
-                "pantheon-systems/drupal-integrations"
-            ],
-            "file-mapping": {
                 "[project-root]/.editorconfig": false,
                 "[project-root]/pantheon.upstream.yml": false,
                 "[project-root]/.gitattributes": false
-            }
+            },
+            "allowed-packages": [
+                "pantheon-systems/drupal-integrations"
+            ]
         },
         "installer-paths": {
-            "web/core": ["type:drupal-core"],
-            "libraries/{$name}": [
-                "furf/jquery-ui-touch-punch",
-                "select2/select2"
+            "web/core": [
+                "type:drupal-core"
             ],
             "web/libraries/{$name}": [
-                "type:drupal-library"
+                "type:drupal-library",
+                "furf/jquery-ui-touch-punch",
+                "select2/select2"
             ],
             "web/modules/contrib/{$name}": [
                 "type:drupal-module"
