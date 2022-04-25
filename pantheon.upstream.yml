@@ -5,6 +5,8 @@ enforce_https: transitional
 php_version: 7.4
 database:
   version: 10.4
+search:
+  version: 8
 drush_version: 10
 build_step: true
 protected_web_paths:
