@@ -25,3 +25,6 @@ workflows:
       - description: "Install site profile"
         script: private/scripts/drush_site_install.php
         type: webphp
+      - description: "Install Commerce Demo modules"
+        script: private/scripts/demo_install.php
+        type: webphp

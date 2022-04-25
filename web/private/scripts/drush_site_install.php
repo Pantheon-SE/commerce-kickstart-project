@@ -8,4 +8,4 @@ $email = $_POST['user_email'];
 
 // Install from profile.
 echo "Installing Commerce Kickstart profile...\n";
-passthru('drush site:install commerce_kickstart --account-mail="' . $email . '" --site-name="' . $title . '" --account-name="superuser" -y && drush en commerce_kickstart_basic_catalog -y');
+passthru('drush site:install commerce_kickstart --account-mail="' . $email . '" --site-name="' . $title . '" --account-name="superuser" -y');
